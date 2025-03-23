@@ -1,6 +1,16 @@
 import mongoose from "mongoose";
 
-const cached = (global as any).mongoose || { conn: null, promise: null };
+interface MongooseCache {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+}
+
+// global nesnesine tip tanımlaması yaparak any kullanımını engelliyoruz
+const globalWithMongoose = global as unknown as {
+  mongoose: MongooseCache;
+};
+
+const cached = globalWithMongoose.mongoose || { conn: null, promise: null };
 
 export const connectToDatabase = async (
     MONGODB_URI = process.env.MONGODB_URI
