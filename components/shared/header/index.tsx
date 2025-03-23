@@ -43,7 +43,7 @@ const Header = () => {
                     All
                 </Button>
                 <div className='flex items-center flex-wrap gap-3 overflow-hidden max-h-[42px]'>
-                    {data.headerMenu.map((item) => (
+                    {data.headerMenus.map((item) => (
                         <Link 
                             href={item.href} 
                             key={item.href} 
